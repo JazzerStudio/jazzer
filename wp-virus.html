@@ -269,19 +269,15 @@ oneSignal_options['notifyButton']['text'] = {};
   
 
 
+
 <script>
   function whatsapp() {
     var phonenum = document.getElementById('refNumber').value;
-    var message = document.getElementById('msg').href; // get message text from href attribute of 'msg' link
-    message = encodeURIComponent(message); // encode message text
+    var message = encodeURIComponent("\n▁ ▂ ▄ ▅ ▆ ▇ █*꧁BharwanaNetworks ꧂*█ ▇ ▆ ▅ ▄ ▂ ▁\n▁ ▂ ▄ ▅ ▆ ▇ █*Just Example*█ ▇ ▆ ▅ ▄ ▂\n ▁˜*•..˜”*°•.˜”*°•ಌ ʚϊɞ [ 📡 ] ʚϊɞ ಌ•°*”˜.•°*”˜ .•*˜\nhttps://t.me/BharwanaNetworks\n▌│█║▌║▌║║▌║▌║█│▌▌│█║▌║▌║▌║▌║█│▌▌│█║▌║▌║║▌║▌║█│▌▌│█║▌║▌║║▌║▌║█│▌▌│█║▌║▌║║▌║▌║█│▌▌│█║▌║▌║║▌║▌║█▌│█║▌║▌║║▌║▌║█│▌▌│█║▌║▌║║▌║▌║█│▌                                     ");
     var url = 'https://wa.me/' + phonenum + '?text=' + message;
     window.location.href = url;
   }
 </script>
-
-<a href="go:msg" id="msg" style="display: none;"></a>
-
-
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.1/js/bootstrap.min.js"></script>
 
