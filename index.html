@@ -1,5 +1,3 @@
-<!DOCTYPE html>
-<html dir='ltr' lang='en'>
 <head><title>Dark DB </title>
 <meta charset='UTF-8' />
 <meta content='width=device-width, initial-scale=1, user-scalable=1, minimum-scale=1, maximum-scale=5' name='viewport' />
@@ -10,9 +8,7 @@
 <link href='https://use.fontawesome.com/releases/v5.3.1/css/all.css' rel='stylesheet' />
 <script src="https://code.iconify.design/2/2.1.0/iconify.min.js"></script>  
 <link href='https://jazzerstudio.github.io/jazzer/jazz.css' rel='stylesheet' /></head>
-
 <body class='oneGrd MN-2 mobS hdMn bD onIndx onHm' id='mainCont'>
-    <!-- ... Your existing body content ... -->
 <script>/*<![CDATA[*/ (localStorage.getItem('mode')) === 'darkmode' ? document.querySelector('#mainCont').classList.add('drK') : document.querySelector('#mainCont').classList.remove('drK') /*]]>*/</script>
 <script src='https://dl.dropbox.com/s/jis9n8umoaev16p/xscript.js'></script>
 <input class='prfI hidden' id='offPrf' type='checkbox' />
@@ -116,42 +112,33 @@
 </figure>
 </div></div></div></div>
 --->
-
-
-
-
-
-    <div class="poster">
-        <div id="button-container">
-            <!-- Button for SIM INFO -->
-            <a href="javascript:void(0);" class="custom-button" onclick="showContent('go:sm')">
-                <img src="https://i.postimg.cc/cLC7NBpK/j-VSt-Mz-sim-card-clipart-file.png" alt="SIM INFO logo">
-                <span> <u>SIM check </span></u>
-            </a>
-            <!-- Add similar buttons for other actions -->
-        </div>
-        
-        <!-- Container to display content -->
-        <div id="content-container"></div>
+  <div class="poster">
+    <div id="button-container">
+      <a href="javascript:void(0);" class="custom-button" onclick="showContent('simInfo')">
+        <img src="https://i.postimg.cc/cLC7NBpK/j-VSt-Mz-sim-card-clipart-file.png" alt="SIM INFO logo">
+        <span> <u>SIM INFO</span></u>
+      </a>
+      <a href="javascript:void(0);" class="custom-button" onclick="showContent('cnicInfo')">
+        <img src="https://i.postimg.cc/rpp1MC70/nadra-logo.png" alt="CNIC INFO logo">
+        <span> <u>CNIC INFO</span></u>
+      </a>
     </div>
+    
+    <div id="simInfo" class="content hidden">
+      <iframe src="go:sm" style="width: 100%; height: 100vh; border: none;"></iframe>
+    </div>
+    <div id="cnicInfo" class="content hidden">
+      <iframe src="https://cnic.com" style="width: 100%; height: 100vh; border: none;"></iframe>
+    </div>
+  </div>
 
-    <footer>
-        <div style="text-align: center;">
-            <p style="font-weight: bold; color: red; text-decoration: underline;">2023 © BharwanaNetworks All Rights Reserved</p>
-        </div>
-    </footer>
+  <!-- ... (footer and navigation code) ... -->
 
-    <script>
-        function showContent(contentId) {
-            var contentContainer = document.getElementById('content-container');
-            var buttonContainer = document.getElementById('button-container');
-            buttonContainer.style.display = 'none';
-
-            if (contentId === 'go:sm') {
-                contentContainer.innerHTML = '<p>This is the SIM INFO content.</p>';
-            }
-            // Add similar content for other buttons
-        }
-    </script>
+  <script>
+    function showContent(contentId) {
+      document.getElementById('button-container').style.display = 'none';
+      document.getElementById(contentId).style.display = 'block';
+    }
+  </script>
 </body>
 </html>
