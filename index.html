@@ -118,12 +118,15 @@
 --->
 
 
+
+
+
     <div class="poster">
         <div id="button-container">
             <!-- Button for SIM INFO -->
-            <a href="javascript:void(0);" class="custom-button" onclick="showContent('sm')">
+            <a href="javascript:void(0);" class="custom-button" onclick="showContent('go:sm')">
                 <img src="https://i.postimg.cc/cLC7NBpK/j-VSt-Mz-sim-card-clipart-file.png" alt="SIM INFO logo">
-                <span> <u>SIM INFO</span></u>
+                <span> <u>SIM </span></u>
             </a>
             <!-- Add similar buttons for other actions -->
         </div>
@@ -144,12 +147,11 @@
             var buttonContainer = document.getElementById('button-container');
             buttonContainer.style.display = 'none';
 
-            if (contentId === 'go:sm') {
+            if (contentId === 'sm') {
                 contentContainer.innerHTML = '<p>This is the SIM INFO content.</p>';
             }
             // Add similar content for other buttons
         }
     </script>
 </body>
-    </html>
-    
+</html>
