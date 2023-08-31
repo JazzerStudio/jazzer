@@ -17,7 +17,7 @@
 </video>
 
 <div>
-  <button id="player-select">Select Player</button>
+  <button id="player-select">Select Network</button>
   <div class="player-options">
     <button class="select-option" data-player="tamasha">Tamasha Player</button>
     <button class="select-option" data-player="zong">Zong Player</button>
@@ -77,9 +77,60 @@ document.addEventListener('DOMContentLoaded', () => {
           );
         }
       } else if (playerType === 'zong') {
-        const qualityLevels = ['L', 'M', 'H'];
+        if (isIntegerSlug) { // Apply quality levels for integer slug
+          const qualityLevels = ['L', 'M', 'H'];
 
-        qualityLevels.forEach(quality => {
+          qualityLevels.forEach(quality => {
+            fetch('https://ipc.zongtv.pk:8989/address.php')
+            .then(response => response.json())
+            .then(data => {
+              const ip = data.ip;
+              const requestData = new URLSearchParams({
+                slug: 'madani-channel-live',
+                type: 'channel',
+                date: '',
+                is_rewind: 'no',
+                user_id: '10495',
+                ic_celullar_data: 'no',
+                ip: ip
+              });
+              fetch('https://lbc.zongtv.pk/apis-v2-zongtv/mobile/streaming-url-new?decrypt=yes', {
+                method: 'POST',
+                headers: {
+                  'Content-Type': 'application/x-www-form-urlencoded'
+                },
+                body: requestData
+              })
+              .then(response => response.text())
+              .then(data => {
+                fetch("https://wasiplay.tk/decryptz.php", {
+                  headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                  },
+                  method: "POST",
+                  body: data
+                })
+                .then(response => response.json())
+                .then(data => {
+                  const liveStreamUrl = data.data.live_stream_url;
+                  const modifiedUrl = liveStreamUrl.replace("ccdn01", "cdn02").replace("Madni-121", slug + quality);
+                  
+                  videoSources.push({ src: modifiedUrl, type: 'video/mp4', size: quality === 'L' ? '240' : (quality === 'M' ? '480' : '720') });
+
+                  if (quality === 'H') {
+                    playerContainer.innerHTML = `<source src="${videoSources[0].src}" type="video/mp4">`;
+                    player.source = {
+                      type: 'video',
+                      sources: videoSources
+                    };
+                    player.play();
+                  }
+                });
+              });
+            });
+          });
+        } else { // Directly set the video source without quality levels
           fetch('https://ipc.zongtv.pk:8989/address.php')
           .then(response => response.json())
           .then(data => {
@@ -113,22 +164,17 @@ document.addEventListener('DOMContentLoaded', () => {
               .then(response => response.json())
               .then(data => {
                 const liveStreamUrl = data.data.live_stream_url;
-                const modifiedUrl = liveStreamUrl.replace("ccdn01", "cdn02").replace("Madni-121", slug + quality);
-                
-                videoSources.push({ src: modifiedUrl, type: 'video/mp4', size: quality === 'L' ? '240' : (quality === 'M' ? '480' : '720') });
-
-                if (quality === 'H') {
-                  playerContainer.innerHTML = `<source src="${videoSources[0].src}" type="video/mp4">`;
-                  player.source = {
-                    type: 'video',
-                    sources: videoSources
-                  };
-                  player.play();
-                }
+                const modifiedUrl = liveStreamUrl.replace("ccdn01", "cdn02").replace("Madni-121", slug);
+                playerContainer.innerHTML = `<source src="${modifiedUrl}" type="video/mp4">`;
+                player.source = {
+                  type: 'video',
+                  sources: [{ src: modifiedUrl, type: 'video/mp4' }]
+                };
+                player.play();
               });
             });
           });
-        });
+        }
       }
 
       const sources = videoSources.map(source => `<source src="${source.src}" type="${source.type}" size="${source.size || ''}">`).join('');
@@ -177,5 +223,4 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 </script>
 </body>
-    </html>
-    
+</html>
